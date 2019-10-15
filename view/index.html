@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test task</title>
+	<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+	<div><b>date</b></div>
+		<p>from <input type="date" name="" id="dateFrom"></p>
+		<p>to <input type="date" name="" id="dateTo"></p>
+	<div><b>status</b></div>
+		<input type="number" max="1" min="0" id="status">
+	<div><b>teachersId</b></div>
+		<input type="text" id="teachers">
+	<div><b>studentsCount</b></div>
+		<p>from <input type="text" name="" id="studentsCountfrom"></p>
+		<p>to <input type="text" name="" id="studentsCountTo"></p>
+	<div><b>page</b></div>
+	<select>
+		<option value=""></option>
+  		
+	</select>
+	<div><b>lessonsPerPage</b></div>
+		<input type="number" id="lessonsPerPage"><br>
+	<button>search</button>
+	<div id="lessons"></div>
+	<script>
+
+
+		$('button').click(function() {
+
+			let data = {}
+		
+		data.dateFrom = $('#dateFrom').val()
+
+		data.dateTo = $('#dateTo').val()
+
+		data.status = $('#status').val()
+
+		data.teachers = $('#teachers').val()
+
+		data.studentsCountfrom = $('#studentsCountfrom').val()
+
+		data.studentsCountTo = $('#studentsCountTo').val()
+
+		data.page = $('select option:selected').html()
+
+		data.lessonsPerPage = $('#lessonsPerPage').val()
+		let page = data.page
+		let lessonsPerPage = data.lessonsPerPage
+				$.ajax({
+					type:'post',
+					url:'/db',
+					data: data,
+					success:data=>{
+
+						$('#lessons').html('')
+						data = JSON.parse(data)
+						let lenData = --data.length
+						if(lenData == lessonsPerPage)data.splice(lessonsPerPage,1)
+							
+						console.log(data)
+						for(el of data)$('#lessons').append('<p>'+JSON.stringify(el)+'</p>')
+						if(lessonsPerPage == lenData){
+
+							let select = $('select')
+							if(page == '' || page == 1){
+
+								select.html('<option >'+1+'</option> <option value="">'+2+'</option>')
+
+							}
+							else if(page > 1){
+								let last = page
+								last--
+								let next = page
+								next++
+								console.log(next)
+
+								select.html('<option >'+last+'</option><option selected>'+page+'</option> <option value="">'+next+'</option>')
+
+							}
+						} 
+					}
+					})
+				})
+		$('#dateFrom,#dateTo,#status,#teachers,#studentsCountfrom,#studentsCountTo').change(()=>{
+			$('select').html('<option value=""></option>')
+		})
+
+	</script>
+</body>
+</html>

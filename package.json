@@ -1,0 +1,22 @@
+{
+  "name": "testtask",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "knex": "^0.19.5",
+    "koa": "^2.8.2",
+    "koa-ajax-params": "0.0.3",
+    "koa-body": "^4.1.1",
+    "koa-ejs": "^4.2.0",
+    "koa-knex": "^0.7.5",
+    "koa-router": "^7.4.0",
+    "koa-views": "^6.2.1",
+    "pg": "^7.12.1"
+  }
+}
