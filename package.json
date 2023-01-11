@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "knex": "^0.19.5",
+    "knex": "^2.4.0",
     "koa": "^2.8.2",
     "koa-ajax-params": "0.0.3",
     "koa-body": "^4.1.1",
